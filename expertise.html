@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTI225 Final Project</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+
+<body>
+	<header>
+		<div id="home">Expertise</div>
+		<nav>  
+			<ul>
+				<li><a href="index.html">Home</a>
+				<li><a href="interest.html">Interests</a>
+				<li><a href="expertise.html">Expertise</a>
+			</ul>
+		</nav>
+	</header>
+	<section>
+		<h2>Showcase: Front-end (AJAX) App</h2>
+	</section>
+	<section id="JSON">
+        <div id="container"></div>
+        <script>
+            let url = 'https://reqres.in/api/users?page=1';
+            fetch(url)
+                .then(function (res) {
+                    return res.json();
+                })
+                .then(function (data) {
+                    appendData(data);
+                })
+                .catch(function (err) {
+                    console.log('error: ' + err);
+                });
+                function appendData(user) {
+                    let html = '';
+                    for (var i = 0; i < user.data.length; i++) {
+                        let htmlSegment = `<div class="user">
+                        <h2>${user.data[i].first_name} ${user.data[i].last_name}</h2>
+                        <img src="${user.data[i].avatar}" >
+                        <div class="email"><a href="email:${user.data[i].email}">${user.data[i].email}</a></div><br>
+                        </div>`;
+                        let contanier = document.getElementById("container");
+                        html += htmlSegment;
+                        container.innerHTML = html;
+                    }
+                }
+        </script>
+	</section>
+	<footer>
+		<p>&copy;Ivan Kovalevsky</p>
+	</footer>
+</body>
+</html>
